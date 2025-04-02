@@ -3,28 +3,30 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, set } from 'firebase/database';
 import './App.css';
 
+// ✅ Global Firebase Initialization (prevent re-init issues)
+const firebaseConfig = {
+  apiKey: "AIzaSyDjspOheSa9WmBbH88MbS56XJoouop0UpA",
+  authDomain: "home-automation-66846.firebaseapp.com",
+  projectId: "home-automation-66846",
+  storageBucket: "home-automation-66846.firebasestorage.app",
+  messagingSenderId: "740225547064",
+  appId: "1:740225547064:web:208b52dffd76e0c86cdfcd",
+  measurementId: "G-EKFSJTZTLC",
+  databaseURL: "https://home-automation-66846-default-rtdb.asia-southeast1.firebasedatabase.app/"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);  // ✅ Store globally for consistency
+
 function App() {
   const [ledStatus, setLedStatus] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Firebase configuration - replace with your own config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDjspOheSa9WmBbH88MbS56XJoouop0UpA",
-      authDomain: "home-automation-66846.firebaseapp.com",
-      projectId: "home-automation-66846",
-      storageBucket: "home-automation-66846.firebasestorage.app",
-      messagingSenderId: "740225547064",
-      appId: "1:740225547064:web:208b52dffd76e0c86cdfcd",
-      measurementId: "G-EKFSJTZTLC"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
     const ledRef = ref(database, 'led');
 
-    // Listen for changes to the LED status in Firebase
-    onValue(ledRef, (snapshot) => {
+    // ✅ Realtime Listener for LED Status
+    const unsubscribe = onValue(ledRef, (snapshot) => {
       const data = snapshot.val();
       setLedStatus(data === true);
       setIsConnected(true);
@@ -32,11 +34,13 @@ function App() {
       console.error("Firebase connection error:", error);
       setIsConnected(false);
     });
+
+    // ✅ Cleanup listener when component unmounts
+    return () => unsubscribe();
   }, []);
 
-  // Toggle LED status in Firebase
+  // ✅ Toggle LED status and sync with Firebase
   const toggleLed = () => {
-    const database = getDatabase();
     const ledRef = ref(database, 'led');
     set(ledRef, !ledStatus);
   };
