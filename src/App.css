@@ -1,129 +1,98 @@
-/* App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
-  background-color: #f5f7fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2f2f2;
 }
 
 .app-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  padding: 2rem;
 }
 
 .card {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 300px;
-  text-align: center;
-}
-
-h1 {
-  color: #333;
-  margin-top: 0;
-  font-weight: 600;
-}
-
-.status-container {
-  margin: 30px 0;
-}
-
-.led {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.led-on {
-  background-color: #4cd964;
-  box-shadow: 0 0 20px rgba(76, 217, 100, 0.7);
-}
-
-.led-off {
-  background-color: #e0e0e0;
-}
-
-.status-text {
-  font-size: 18px;
-  font-weight: 500;
-  color: #333;
-}
-
-.toggle-button {
-  background-color: #007aff;
+  background-color: #7D43BD;
   color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 12px 25px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  outline: none;
-  box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-button:hover {
-  background-color: #0069d9;
-  transform: translateY(-2px);
-  box-shadow: 0 7px 15px rgba(0, 122, 255, 0.4);
-}
-
-.toggle-button:active {
-  transform: translateY(0);
-}
-
-.toggle-button.on {
-  background-color: #ff3b30;
-  box-shadow: 0 5px 15px rgba(255, 59, 48, 0.3);
-}
-
-.toggle-button.on:hover {
-  background-color: #e0352b;
-  box-shadow: 0 7px 15px rgba(255, 59, 48, 0.4);
-}
-
-.toggle-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+.card-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .connection-status {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 20px;
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
 .connection-indicator {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  margin-right: 8px;
+  background-color: gray;
 }
 
-.connected {
-  background-color: #4cd964;
+.connection-indicator.connected {
+  background-color: #00ff7f;
 }
 
-.disconnected {
-  background-color: #ff3b30;
+.connection-indicator.disconnected {
+  background-color: red;
 }
 
-.connection-status p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
+.section {
+  margin-top: 2rem;
+}
+
+.stream-btn {
+  padding: 10px 16px;
+  background-color: white;
+  color: #7D43BD;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  transition: background 0.3s;
+}
+
+.stream-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.media-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.media-card {
+  background-color: white;
+  padding: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.media-image,
+.media-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.empty-msg {
+  color: white;
+  font-style: italic;
 }
